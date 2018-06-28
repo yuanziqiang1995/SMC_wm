@@ -896,6 +896,13 @@ int main (int argc, char **argv) {
             }
             while(fgets(result_buf, sizeof(result_buf), fp) != NULL)
             {
+            /*
+                if('\n' == result_buf[strlen(result_buf)-1])
+	            {
+	                result_buf[strlen(result_buf)-1] = '\0';
+	            }
+                printf("命令【%s】 输出【%s】\r\n", callTC.c_str(), result_buf);
+             */
             }
             ret = pclose(fp);
             if(-1 == ret)

@@ -166,13 +166,14 @@ bool interface::check_trace(Sampling sample1,char *prop_file1,char *modelfile)
     while(1)
     {
         sample1.get_one_sample();
+        //cout<<sample1.cpd_order.size()<<" "<<state_vars.size()<<" "<<endl;
         if(sample1.sample_size==1)
         {
             file1<<"time";
             for(int i=0;i<sample1.cpd_order.size();i++) {//
                 state_vars.push_back(string(sample1.cpd_order[i]));
                 file1<<" "<<sample1.cpd_order[i];
-             //cout<<string(sample1.cpd_order[i])<<endl;
+                //cout<<string(sample1.cpd_order[i])<<endl;
             }
             file1<<endl;
         }
@@ -180,7 +181,7 @@ bool interface::check_trace(Sampling sample1,char *prop_file1,char *modelfile)
         for (int j = 0; j <state_vars.size() ; j++) {//
             state.push_back(make_pair(state_vars.at(j), sample1.old_sample[j]));
             file1<<sample1.old_sample[j]<<" ";
-                //cout<<state_vars.at(j)<<" "<<sample1.sampling_result[i][j]<<endl;
+            //cout<<state_vars.at(j)<<" "<<sample1.old_sample[j]<<endl;
         }
         file1<<endl;
             //cout<<i<<endl;
@@ -209,7 +210,9 @@ int interface::checkmodel(char *modelfile,char*propfile)
     tracefile = gettracefilename();
 	GM gm;
 	gm.readUAI(modelfile);
+    //cout<<modelfile<<endl;
 	Sampling sampler(gm.bayesnet);
+	//gm.bayesnet.get_cpd_info();
     int result = 0;
     //cout<<"Strat checking"<<endl;
     result = check_trace(sampler,propfile,modelfile);

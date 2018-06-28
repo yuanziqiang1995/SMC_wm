@@ -125,7 +125,6 @@ void Sampling::get_one_sample()
 				for (int k = 0; k < bayesnet.cpd_list[j].cpd.variable_card; k++)
 				{
 					original_sample[cpd_order[j]] = k;
-
 					posssible_list[k] = bayesnet.query_discrete_cpd(bayesnet.cpd_list[j].cpd, original_sample);
 				}
 				most_possible_result = double(RandomChosse(posssible_list));
